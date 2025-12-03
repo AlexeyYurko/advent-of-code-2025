@@ -3,6 +3,7 @@ package day03
 import (
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 )
 
@@ -16,11 +17,6 @@ func New() *Solver {
 	s := &Solver{input: string(input)}
 	s.banks = strings.Split(s.input, "\n")
 	return s
-}
-
-type Jolts struct {
-	Position int
-	Value    int
 }
 
 func (s *Solver) Part1() (interface{}, error) {
@@ -53,5 +49,30 @@ func (s *Solver) Part1() (interface{}, error) {
 }
 
 func (s *Solver) Part2() (interface{}, error) {
-	return nil, nil
+	var total int64
+	for _, bank := range s.banks {
+		n := len(bank)
+		toRemove := n - 12
+
+		stack := make([]byte, 0, 12+toRemove)
+
+		for i := 0; i < n; i++ {
+			d := bank[i]
+			for toRemove > 0 && len(stack) > 0 && d > stack[len(stack)-1] {
+				stack = stack[:len(stack)-1]
+				toRemove--
+			}
+			stack = append(stack, d)
+		}
+
+		if toRemove > 0 {
+			stack = stack[:len(stack)-toRemove]
+		}
+
+		resultStr := string(stack[:12])
+
+		val, _ := strconv.ParseInt(resultStr, 10, 64)
+		total += val
+	}
+	return total, nil
 }
