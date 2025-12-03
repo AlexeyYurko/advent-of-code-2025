@@ -40,6 +40,7 @@ func prepareData(s string) ([]Steps, error) {
 	}
 	return openingSteps, nil
 }
+
 func (s *Solver) Part1() (interface{}, error) {
 	position := 50
 	password := 0
