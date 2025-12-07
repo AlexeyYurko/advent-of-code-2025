@@ -9,11 +9,11 @@ import (
 )
 
 func main() {
-	day := flag.Int("day", 0, "day to run (1-25)")
+	day := flag.Int("day", 0, "day to run (1-12)")
 	flag.Parse()
 
-	if *day < 1 || *day > 25 {
-		log.Fatal("day must be between 1 and 25")
+	if *day < 1 || *day > 12 {
+		log.Fatal("day must be between 1 and 12")
 	}
 
 	result, err := runner.Run(*day)
