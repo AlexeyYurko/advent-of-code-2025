@@ -4,6 +4,10 @@ type Point struct {
 	X, Y int
 }
 
+type Point3D struct {
+	X, Y, Z int
+}
+
 func (p Point) Add(other Point) Point {
 	return Point{p.X + other.X, p.Y + other.Y}
 }
